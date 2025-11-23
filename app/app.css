@@ -13,3 +13,25 @@ body {
     color-scheme: dark;
   }
 }
+
+.visualization-panel {
+  display: flex;
+  flex-direction: row;
+  color: #333;
+}
+
+.view {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.graph {
+  /* border: 1px solid #ccc;  */
+  background: #f9f9f9;
+  border-radius: 8px;
+  align-self: center;
+
+}
