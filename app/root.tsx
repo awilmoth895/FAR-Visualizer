@@ -9,8 +9,10 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import { ZoningProvider } from "./ZoningContext";
+import { ZoningProvider } from "./context/ZoningContext";
+import { ConfigProvider } from "./context/ConfigContext";
 import presets from '../config/defaults.json';
+import configJson from '../config/config.json';
 
 
 export const links: Route.LinksFunction = () => [
@@ -49,9 +51,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <ZoningProvider init={presets.init}>
-      <Outlet />
-    </ZoningProvider>
+    <ConfigProvider init={configJson}>
+      <ZoningProvider init={presets.init}>
+        <Outlet />
+      </ZoningProvider>
+    </ConfigProvider>
   );
 }
 

@@ -2,7 +2,8 @@
 import React, { use, useState } from "react";
 import "./sidebar.css";
 import presetsJson from '../config/defaults.json';
-import { useZoningContext } from "~/ZoningContext";
+import { useZoningContext } from "../app/context/ZoningContext";
+import { useConfigContext } from "../app/context/ConfigContext";
 
 export default function sidebar() {
     const {
@@ -22,11 +23,15 @@ export default function sidebar() {
 
         // siteBaseArea, maxSiteArea,
         calculateBuildingWidth, calculateBuildingDepth, calculateBuildingHeight,
-        calculateBuildingArea, calculateNumberOfUnits, 
+        calculateBuildingArea, calculateNumberOfUnits,
         // calculateParkingArea, calculateResidentialArea,
 
         setEverything
     } = useZoningContext();
+
+    const {
+        scale, setScale
+    }  = useConfigContext();
 
 
     // local UI-only flags
@@ -58,7 +63,7 @@ export default function sidebar() {
     const handleUnitCalcTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUnitCalcType(e.target.value);
         if (e.target.value == "Average Unit Size") {
-            setAverageUnitSize(averageUnitSize*maxUnits);
+            setAverageUnitSize(averageUnitSize * maxUnits);
 
             setMaxUnits(-1);
             // setAverageUnitSize("")
@@ -69,7 +74,7 @@ export default function sidebar() {
             tempMaxUnits = 1;
             setMaxUnits(1)
         }
-        setAverageUnitSize(buildingArea/tempMaxUnits);
+        setAverageUnitSize(buildingArea / tempMaxUnits);
     }
 
     // compute derived building sizes on render
@@ -90,16 +95,17 @@ export default function sidebar() {
 
     function presets() {
         const presetNames = Object.keys(presetsJson.zoning);
-        
-    
+
+
         return (
             <div className="sidebar-section" id="presets-container">
-                <h2 className="sidebar-title">{preset}</h2>
+                <h2 className="sidebar-title">Presets</h2>
+                <div className="description-box">{preset}</div>
                 <div className="content-box">
                     {Array.from(presetNames).map((name, i) => {
                         return (
                             <div key={i} className="preset-item">
-                                <button className='preset-button' onClick={() => setPresets(name)}>{name}</button>
+                                <button className='preset-button' onClick={() => setPresets(name)}>{presetsJson.zoning[name].title}</button>
                             </div>
                         );
                     })}
@@ -109,7 +115,7 @@ export default function sidebar() {
     }
 
     function unitCalc() {
-        
+
         if (unitCalcType == "Average Unit Size") {
             return (
                 <label>
@@ -119,7 +125,7 @@ export default function sidebar() {
                 </label>
             );
         }
-        
+
         return (
             <label>
                 Max Units:
@@ -127,8 +133,8 @@ export default function sidebar() {
                 sqft
             </label>
         );
-        
-       
+
+
     }
 
 
@@ -178,7 +184,7 @@ export default function sidebar() {
                         <br></br>
                         {unitCalc()}
                     </div>
-                    
+
                     {/* <label>
                         Minimum Unit Size:
                         <input type="number" min={150} max={averageUnitSize} step={50} value={minUnitSize} onChange={handleMinUnitSizeChange} />
@@ -205,10 +211,26 @@ export default function sidebar() {
     }
 
 
-  return (
-    <div id="sidebar">
-        {presets()}
-        {variablePanel()}
-    </div>
-  );
+    function config() {
+        return (
+            <div className="sidebar-section" id="config">
+                <h2 className="sidebar-title">Settings</h2>
+                <div className='content-box'>
+                    <label>
+                        Scale: 
+                        <input type="number" min={1} max={50} step={1} value={scale} onChange={(e) => setScale(parseFloat(e.target.value))} />    
+                    </label>                    
+                </div>
+            </div>
+        );
+    }
+
+
+    return (
+        <div id="sidebar">
+            {presets()}
+            {variablePanel()}
+            {config()}
+        </div>
+    );
 }

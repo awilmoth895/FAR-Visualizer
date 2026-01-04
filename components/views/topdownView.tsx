@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./frontView.css";
-import { useZoningContext } from "~/ZoningContext";
+import { useZoningContext } from "~/context/ZoningContext";
+import { useConfigContext } from "~/context/ConfigContext";
+import "../views/view.css";
 
-// move these
-const ELEVATION_SCALE = 10; // pixels per unit
 
 export default function frontView() {
 
@@ -31,13 +31,17 @@ export default function frontView() {
         setEverything
     } = useZoningContext();
 
+    const {
+        scale, setScale
+    }  = useConfigContext();
+
     const buildingWidth = calculateBuildingWidth();
     const buildingDepth = calculateBuildingDepth();
     const buildingHeight = calculateBuildingHeight();
     const numUnits = calculateNumberOfUnits();
     const buildingArea = calculateBuildingArea();
 
-    function renderParkingArea(elevationScale: number, buildingOffsetX: number, buildingOffsetY: number, buildingDepthPx: number) {
+    function renderParkingArea(scale: number, buildingOffsetX: number, buildingOffsetY: number, buildingDepthPx: number) {
         if (parkingPerUnit > 0) {
             const parkingArea = calculateParkingArea();
             let parkingWidth = buildingWidth;
@@ -49,8 +53,8 @@ export default function frontView() {
             // make parking render in blocks of parking spaces
 
             const parkingDepth = parkingArea / parkingWidth;
-            const parkingDepthPx = parkingDepth * elevationScale;
-            const parkingWidthPx = parkingWidth * elevationScale;
+            const parkingDepthPx = parkingDepth * scale;
+            const parkingWidthPx = parkingWidth * scale;
             const parkingOffsetY = buildingOffsetY + buildingDepthPx;
 
             if (parkingInSetback) {
@@ -61,7 +65,7 @@ export default function frontView() {
         return null;
     }
 
-    function renderOpenSpaceArea(elevationScale: number, buildingOffsetX: number, buildingOffsetY: number, buildingDepthPx: number) {
+    function renderOpenSpaceArea(scale: number, buildingOffsetX: number, buildingOffsetY: number, buildingDepthPx: number) {
         if (openSpacePerUnit > 0) {
             const openSpaceArea = openSpacePerUnit * numUnits;
             const openSpaceWidth = buildingWidth;
@@ -73,21 +77,20 @@ export default function frontView() {
             // console.log("Building Depth", buildingDepth);
             // console.log("Setback Depth: ", siteDepth - setbacks.front - setbacks.back);
 
-            const openSpaceWidthPx = openSpaceWidth * elevationScale;
-            const openSpaceDepthPx = openSpaceDepth * elevationScale;
+            const openSpaceWidthPx = openSpaceWidth * scale;
+            const openSpaceDepthPx = openSpaceDepth * scale;
 
-            return <rect x={buildingOffsetX} y={-(buildingOffsetY + buildingDepthPx + openSpaceDepthPx)} width={openSpaceWidthPx} height={openSpaceDepthPx} fill='rgba(12, 199, 84, 0.5)' stroke='rgba(7, 167, 68, 0.5)' />;
+            return <rect className="open-space" x={buildingOffsetX} y={-(buildingOffsetY + buildingDepthPx + openSpaceDepthPx)} width={openSpaceWidthPx} height={openSpaceDepthPx} />;
         }
         return null;
     }
 
-    const elevationScale = ELEVATION_SCALE; // pixels per unit
-    const lotWidthPx = siteWidth * elevationScale;
-    const lotDepthPx = siteDepth * elevationScale;
-    const buildingDepthPx = buildingDepth * elevationScale;
-    const buildingWidthPx = buildingWidth * elevationScale;
-    const buildingOffsetX = setbacks.left * elevationScale;
-    const buildingOffsetY = setbacks.front * elevationScale;
+    const lotWidthPx = siteWidth * scale;
+    const lotDepthPx = siteDepth * scale;
+    const buildingDepthPx = buildingDepth * scale;
+    const buildingWidthPx = buildingWidth * scale;
+    const buildingOffsetX = setbacks.left * scale;
+    const buildingOffsetY = setbacks.front * scale;
 
     const sideD = lotDepthPx + 40;
     const sideW = lotWidthPx + 40;
@@ -97,20 +100,23 @@ export default function frontView() {
             <h2>Topdown View</h2>
             <svg className="graph" width={sideW} height={sideD}>
                 <defs>
-                    <pattern id="grid" width={elevationScale} height={elevationScale} patternUnits="userSpaceOnUse">
-                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#504f4fff" strokeWidth="0.5" />
+                    <pattern id="grid" width={scale} height={scale} patternUnits="userSpaceOnUse">
+                        <path d="M 10 0 L 0 0 0 10"/>
+                    </pattern>
+                    <pattern id="buildingTexture" patternUnits="userSpaceOnUse" width="95" height="100">  {/* Adjust width/height to control tiling size */}
+                        <image href="../../assets/brick-wall.svg" width="100" height="100"/>  {/* Path to your SVG */}
                     </pattern>
                 </defs>
 
                 <g transform={`translate(20, ${sideD - 20})`}>
-                    <rect x={buildingOffsetX} y={-(buildingDepthPx + buildingOffsetY)} width={buildingWidthPx} height={buildingDepthPx} fill='#90caf9' opacity=".75" stroke="#1e88e5" />
+                    <rect className="building" x={buildingOffsetX} y={-(buildingDepthPx + buildingOffsetY)} width={buildingWidthPx} height={buildingDepthPx} fill="url(#buildingTexture)"/>
 
                     <rect x={0} y={-lotDepthPx} width={lotWidthPx} height={lotDepthPx} fill="url(#grid)" pointerEvents="none" />
 
-                    <rect x={0} y={-lotDepthPx} width={lotWidthPx} height={lotDepthPx} fill="rgba(0,0,0,0)" stroke="#999" strokeDasharray="6 4" />
-                    {renderParkingArea(elevationScale, buildingOffsetX, buildingOffsetY, buildingDepthPx)}
-                    {renderOpenSpaceArea(elevationScale, buildingOffsetX, buildingOffsetY, buildingDepthPx)}
-                    <line x1={-10} y1={0} x2={lotWidthPx + 10} y2={0} stroke="#333" />
+                    <rect className="outer-stroke" x={0} y={-lotDepthPx} width={lotWidthPx} height={lotDepthPx}/>
+                    {renderParkingArea(scale, buildingOffsetX, buildingOffsetY, buildingDepthPx)}
+                    {renderOpenSpaceArea(scale, buildingOffsetX, buildingOffsetY, buildingDepthPx)}
+                    {/* <line x1={-10} y1={0} x2={lotWidthPx + 10} y2={0} stroke="#333" /> */}
                 </g>
             </svg>
         </div>

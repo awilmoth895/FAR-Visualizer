@@ -1,0 +1,56 @@
+
+@import url("../../config/variables.css");
+
+.graph {
+    /* stroke: red; */
+}
+
+rect {
+    /* fill: blue; */
+}
+
+line {
+    /* stroke: green; */
+}
+
+.topdown-view {
+    /* fill: var(--info-color); */
+    /* background-image: url("../../assets/roof_texture.jpg"); */
+
+}
+
+#grid path {
+    stroke: #504f4fff;
+    stroke-width: .5;
+    fill: none;
+}
+
+.building {
+    stroke: var(--sidebar-color-dark);
+    fill: var(--sidebar-color);
+    opacity: 0.75;
+
+}
+
+.building:nth-child(even) {
+    fill: var(--sidebar-color-dark);
+}
+
+.outer-stroke {
+    stroke: #999;
+    stroke-dasharray: 6 4;
+    fill: rgba(0,0,0,0);
+}
+
+.ground-line {
+    stroke: #333;
+}
+
+.open-space {
+    fill: var(--info-color);
+    stroke: var(--info-color-dark);
+}
+
+#roof {
+    background: url("../../assets/roof_texture.jpg");
+}

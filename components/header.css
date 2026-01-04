@@ -1,9 +1,11 @@
+@import url("../config/variables.css");
+
 #header-container {
-    background-color: #A98467;
+    background-color: var(--header-color);
     padding: 1px 20px;
-    color: white;
+    color: var(--text-color-light);
     margin: 0;
-    border-bottom: 5px solid #855858;
+    border-bottom: 5px solid var(--header-color-dark);
     position: sticky;
     width: 100%;
     top: 0;

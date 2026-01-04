@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import useZoningCalculator from '../utils/useZoningCalculator';
+import useZoningCalculator from '../../utils/useZoningCalculator';
 
 type ZoningContextType = ReturnType<typeof useZoningCalculator>;
 

@@ -1,4 +1,4 @@
-import { useZoningContext } from "~/ZoningContext";
+import { useZoningContext } from "~/context/ZoningContext";
 import "./infoPanel.css";
 
 

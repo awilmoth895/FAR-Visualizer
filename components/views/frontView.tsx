@@ -1,11 +1,9 @@
 import React from "react";
 import "./frontView.css";
-import { useZoningContext } from "~/ZoningContext";
+import { useZoningContext } from "~/context/ZoningContext";
+import { useConfigContext } from "~/context/ConfigContext";
 
-// move these
-const ELEVATION_SCALE = 10; // pixels per foot
 
- 
 export default function frontView() {
     const {
         far, setFar,
@@ -29,17 +27,20 @@ export default function frontView() {
         setEverything
     } = useZoningContext();
 
+    const {
+        scale, setScale
+    }  = useConfigContext();
+
     const buildingWidth = calculateBuildingWidth();
     const buildingDepth = calculateBuildingDepth();
     const buildingHeight = calculateBuildingHeight();
     const numUnits = calculateNumberOfUnits();
     const buildingArea = calculateBuildingArea();
 
-    const elevationScale = ELEVATION_SCALE;
-    const lotHeightPx = maxHeight * elevationScale;
-    const lotWidthPx = siteWidth * elevationScale;
-    const buildingWidthPx = buildingWidth * elevationScale;
-    const buildingOffsetX = setbacks.left * elevationScale;
+    const lotHeightPx = maxHeight * scale;
+    const lotWidthPx = siteWidth * scale;
+    const buildingWidthPx = buildingWidth * scale;
+    const buildingOffsetX = setbacks.left * scale;
     const visibleFloors = Math.max(1, Math.floor(buildingHeight / floorHeight));
 
     const frontW = lotWidthPx + 40;
@@ -50,20 +51,20 @@ export default function frontView() {
             <h2>Front View</h2>
             <svg className="graph" width={frontW} height={frontH}>
                 <defs>
-                    <pattern id="grid" width={elevationScale} height={elevationScale} patternUnits="userSpaceOnUse">
+                    <pattern id="grid" width={scale} height={scale} patternUnits="userSpaceOnUse">
                         <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#504f4fff" strokeWidth="0.5" />
                     </pattern>
                 </defs>
                 <g transform={`translate(20, ${frontH - 20})`}>
                     {Array.from({ length: visibleFloors }).map((_, i) => {
-                        const fh = floorHeight * elevationScale;
+                        const fh = floorHeight * scale;
                         const y = -((i + 1) * fh);
-                        return <rect key={i} x={buildingOffsetX} y={y} width={buildingWidthPx} height={fh} fill={i % 2 === 0 ? '#90caf9' : '#64b5f6'} stroke="#1e88e5" />;
+                        return <rect className="building" key={i} x={buildingOffsetX} y={y} width={buildingWidthPx} height={fh} />;
                     })}
 
                     <rect x={0} y={-lotHeightPx} width={lotWidthPx} height={lotHeightPx} fill="url(#grid)" pointerEvents="none" />
-                    <rect x={0} y={-lotHeightPx} width={lotWidthPx} height={lotHeightPx} fill="rgba(0,0,0,0)" stroke="#999" strokeDasharray="6 4" />
-                    <line x1={-10} y1={0} x2={lotWidthPx + 10} y2={0} stroke="#333" />
+                    <rect className="outer-stroke" x={0} y={-lotHeightPx} width={lotWidthPx} height={lotHeightPx} />
+                    <line className="ground-line"x1={-10} y1={0} x2={lotWidthPx + 10} y2={0} />
                 </g>
             </svg>
         </div>

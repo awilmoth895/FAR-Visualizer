@@ -1,0 +1,16 @@
+html {
+    --text-color-light: white;
+    --text-color-dark: black;
+
+    --header-color: #A98467;
+    --header-color-dark: #855858;
+    --header-color-light: #ceaf98;
+
+    --sidebar-color: #778da9;
+    --sidebar-color-dark: #415a77;
+    --sidebar-color-light: #869bb5;
+    
+    --info-color: #a3b18a;
+    --info-color-dark: #588157;
+    --info-color-light: #afb99d;
+}

@@ -1,9 +1,9 @@
 import React from "react";
 import "./sideView.css";
-import { useZoningContext } from "~/ZoningContext";
+import { useZoningContext } from "~/context/ZoningContext";
+import { useConfigContext } from "~/context/ConfigContext";
 
 // move these
-const ELEVATION_SCALE = 10; // pixels per foot
 const showOverflowArea = false;
 
 export default function sideView() {
@@ -29,6 +29,10 @@ export default function sideView() {
         setEverything
     } = useZoningContext();
 
+    const {
+        scale, setScale
+    }  = useConfigContext();
+
     const buildingWidth = calculateBuildingWidth();
     const buildingDepth = calculateBuildingDepth();
     const buildingHeight = calculateBuildingHeight();
@@ -37,11 +41,10 @@ export default function sideView() {
 
 
 
-    const elevationScale = ELEVATION_SCALE;
-    const lotHeightPx = maxHeight * elevationScale;
-    const lotDepthPx = siteDepth * elevationScale;
-    const buildingDepthPx = buildingDepth * elevationScale;
-    const buildingOffsetX = setbacks.front * elevationScale;
+    const lotHeightPx = maxHeight * scale;
+    const lotDepthPx = siteDepth * scale;
+    const buildingDepthPx = buildingDepth * scale;
+    const buildingOffsetX = setbacks.front * scale;
     const visibleFloors = Math.max(1, Math.floor(buildingHeight / floorHeight));
 
     const sideW = lotDepthPx + 40;
@@ -52,14 +55,14 @@ export default function sideView() {
             <h2>Side View</h2>
             <svg className="graph" width={sideW} height={sideH}>
                 <defs>
-                    <pattern id="grid" width={elevationScale} height={elevationScale} patternUnits="userSpaceOnUse">
+                    <pattern id="grid" width={scale} height={scale} patternUnits="userSpaceOnUse">
                         <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#504f4fff" strokeWidth="0.5" />
                     </pattern>
                 </defs>
 
                 <g transform={`translate(20, ${sideH - 20})`}>
                     {Array.from({ length: visibleFloors }).map((_, i) => {
-                        const fh = floorHeight * elevationScale;
+                        const fh = floorHeight * scale;
                         const y = -((i + 1) * fh);
 
                         const floorArea = buildingWidth * buildingDepth;
@@ -69,19 +72,19 @@ export default function sideView() {
 
                         if (i + 1 == visibleFloors && topFloorArea < floorArea) {
                             const topFloorDepth = topFloorArea / buildingWidth;
-                            const topFloorDepthPx = topFloorDepth * elevationScale;
+                            const topFloorDepthPx = topFloorDepth * scale;
 
                             if (topFloorArea < minUnitSize && !showOverflowArea) return null;
 
-                            return <rect key={i} x={buildingOffsetX} y={y} width={topFloorDepthPx} height={fh} fill={i % 2 === 0 ? '#90caf9' : '#64b5f6'} stroke="#1e88e5" />;
+                            return <rect className="building" key={i} x={buildingOffsetX} y={y} width={topFloorDepthPx} height={fh} />;
                         }
 
-                        return <rect key={i} x={buildingOffsetX} y={y} width={buildingDepthPx} height={fh} fill={i % 2 === 0 ? '#90caf9' : '#64b5f6'} stroke="#1e88e5" />;
+                        return <rect className="building" key={i} x={buildingOffsetX} y={y} width={buildingDepthPx} height={fh} />;
                     })}
 
                     <rect x={0} y={-lotHeightPx} width={lotDepthPx} height={lotHeightPx} fill="url(#grid)" pointerEvents="none" />
-                    <rect x={0} y={-lotHeightPx} width={lotDepthPx} height={lotHeightPx} fill="rgba(0,0,0,0)" stroke="#999" strokeDasharray="6 4" />
-                    <line x1={-10} y1={0} x2={lotDepthPx + 10} y2={0} stroke="#333" />
+                    <rect className="outer-stroke" x={0} y={-lotHeightPx} width={lotDepthPx} height={lotHeightPx} />
+                    <line className="ground-line" x1={-10} y1={0} x2={lotDepthPx + 10} y2={0} />
                 </g>
             </svg>
         </div>

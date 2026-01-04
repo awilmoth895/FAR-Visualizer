@@ -1,8 +1,10 @@
+@import url("../config/variables.css");
+
 #sidebar {
-    background-color: #778da9;
+    background-color: var(--sidebar-color);
     height: 100vh;
-    border-right: 5px solid #415a77;
-    color: white;;
+    border-right: 5px solid var(--sidebar-color-dark);
+    color: var(--text-color-light);
 }
 
 .sidebar-title {
@@ -19,6 +21,12 @@
 }
 
 #sidebar .content-box {
-    border-bottom: 2px solid #869bb5;
+    border-bottom: 2px solid var(--sidebar-color-light);
     padding-bottom: 20px;
+}
+
+.preset-button {
+    padding: 5px;
+    margin: 5px;
+    /* color: red; */
 }
