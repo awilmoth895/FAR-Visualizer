@@ -1,0 +1,156 @@
+{
+    "init": {
+        "siteWidth": 50,
+        "siteDepth": 75,
+        "maxHeight": 35,
+        "floorHeight": 10,
+        "maxFar": 2.0,
+        
+        "setbacks": { "front": 12.5, "right": 3, "back": 10, "left": 3 },
+
+        "averageUnitSize": 800,
+        "minUnitSize": 500,
+        "showOverflowArea": true,
+
+        "parkingPerUnit": 0,
+        "parkingLength": 18,
+        "parkingWidth": 8.6,
+        "laneWidth": 12,
+
+        "openSpacePerUnit": 75,
+
+        "elevationScale": 10
+    },
+    
+    "site": {
+        "gridLot": {
+            "siteWidth": 40,
+            "siteDepth": 150
+        },
+        
+        "gridLot-half": {
+            "siteWidth": 40,
+            "siteDepth": 75
+        }
+        
+    },
+    
+    "zoning": { 
+        "missingMiddle1": {
+            "title": "Missing Middle Far 1 - Inner Lot",
+            "maxHeight": 35,
+            "far": 1.0,
+
+            "setbacks": {
+                "front": 12.5,
+                "right": 3,
+                "back": 15,
+                "left": 3
+            },
+
+            "parkingPerUnit": 0,
+            "parkingLength": 18,
+            "parkingWidth": 8.6,
+            "ParkingLaneWidth": 12,
+
+            "openSpacePerUnit": 125
+        },
+
+        "missingMiddle1-corner": {
+            "title": "Missing Middle Far 1 - Corner Lot",
+            "maxHeight": 35,
+            "far": 1.0,
+
+            "setbacks": {
+                "front": 12.5,
+                "right": 3,
+                "back": 15,
+                "left": 12.5
+            },
+
+            "parkingPerUnit": 0,
+            "parkingLength": 18,
+            "parkingWidth": 8.6,
+            "ParkingLaneWidth": 12,
+
+            "openSpacePerUnit": 125
+        },
+
+        "missingMiddle2": {
+            "title": "Missing Middle Far 2 - Inner Lot",
+            "maxHeight": 35,
+            "floorHeight": 10,
+            "far": 2.0,
+
+            "setbacks": {
+                "front": 12.5,
+                "right": 3,
+                "back": 10,
+                "left": 3
+            },
+
+            "parkingPerUnit": 0,
+            "parkingLength": 18,
+            "parkingWidth": 8.6,
+            "ParkingLaneWidth": 12,
+
+            "openSpacePerUnit": 75
+        },
+
+        "missingMiddle2-corner": {
+            "title": "Missing Middle Far 2 - Corner Lot",
+            "maxHeight": 35,
+            "floorHeight": 10,
+            "far": 2.0,
+
+            "setbacks": {
+                "front": 12.5,
+                "right": 3,
+                "back": 10,
+                "left": 12.5
+            },
+
+            "parkingPerUnit": 0,
+            "parkingLength": 18,
+            "parkingWidth": 8.6,
+            "ParkingLaneWidth": 12,
+
+            "openSpacePerUnit": 75
+        },
+
+        "r1": {
+            "title": "R-1 Single Family Housing",
+            "maxHeight": 35,
+            "floorHeight": 10,
+            "far": 2.0,
+
+            "setbacks": {
+                "front": 20,
+                "right": 5,
+                "back": 15,
+                "left": 5
+            },
+
+            "parkingPerUnit": 2,
+            "parkingLength": 20,
+            "parkingWidth": 10,
+            "ParkingLaneWidth": 0,
+
+            "openSpacePerUnit": 0,
+            
+            "allowedUses": [
+                "residential"
+            ],
+
+            "maxUnits": 1,
+
+            "minLotWidth": 52,
+            "miniLotDepth": 100,
+
+            "maxLotWidth": -1,
+            "maxLotDepth": 160,
+            
+            "maxCoverage": 0.40
+        }
+    }
+}

@@ -1,9 +1,7 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [
-    index("routes/home.tsx"),
-    route("test", "./routes/test.tsx"),
-    // route("density", "./routes/density-visualizer.tsx")
-    route("blueprint", "./routes/blueprint-visualizer.tsx"),
-    route("visualizer", "./routes/visualizer.tsx")
+    route("", "./routes/visualizer-hook.tsx"),
+    // route("visualizer-hook", "./routes/visualizer-hook.tsx"),
+    // route("visualizer-isometric", "./routes/visualizer-isometric.tsx"),
 ] satisfies RouteConfig;

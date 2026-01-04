@@ -1,0 +1,25 @@
+#header-container {
+    background-color: #A98467;
+    padding: 1px 20px;
+    color: white;
+    margin: 0;
+    border-bottom: 5px solid #855858;
+    position: sticky;
+    width: 100%;
+    top: 0;
+}
+
+#header-title-container {
+    display: flex;
+    align-items: center;
+}
+
+#header-title {
+    font-size: 30px;
+    padding: 0 10px;
+    /* text-align: bottom; */
+}
+
+#header-icon {
+    /* height: 100px; */
+}
