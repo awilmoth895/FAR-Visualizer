@@ -6,6 +6,9 @@ import presets from '../../config/defaults.json';
 import header from '../../components/header';
 import sidebar from '../../components/sidebar';
 import infoPanel from '../../components/infoPanel';
+import sideView from '../../components/views/sideView';
+import frontView from '../../components/views/frontView';
+import topdownView from '../../components/views/topdownView';
 import { useZoningContext } from '~/ZoningContext';
 
 // site defaults (kept here for initial hook values)
@@ -160,97 +163,97 @@ export default function VisualizerHook() {
     const numUnits = calculateNumberOfUnits();
     const buildingArea = calculateBuildingArea();
 
-    function unitCalc() {
+    // function unitCalc() {
 
-        if (unitCalcType == "Average Unit Size") {
-            return (
-                <label>
-                    Average Unit Size:
-                    <input type="number" min={minUnitSize} max={3000} step={50} value={averageUnitSize} onChange={handleAverageUnitSizeChange} />
-                    sqft
-                </label>
-            );
-        }
+    //     if (unitCalcType == "Average Unit Size") {
+    //         return (
+    //             <label>
+    //                 Average Unit Size:
+    //                 <input type="number" min={minUnitSize} max={3000} step={50} value={averageUnitSize} onChange={handleAverageUnitSizeChange} />
+    //                 sqft
+    //             </label>
+    //         );
+    //     }
 
-        return (
-            <label>
-                Max Units:
-                <input type="number" min={0} max={50} step={1} value={maxUnits} onChange={handleMaxUnitChange} />
-                sqft
-            </label>
-        );
+    //     return (
+    //         <label>
+    //             Max Units:
+    //             <input type="number" min={0} max={50} step={1} value={maxUnits} onChange={handleMaxUnitChange} />
+    //             sqft
+    //         </label>
+    //     );
 
 
-    }
+    // }
 
-    function variablePanel() {
-        return (
-            <div className="variable-panel">
-                <p>Adjust the parameters to see how they affect the building layout.</p>
-                {presetView()}
-                <div className='content-box'>
-                    <label>
-                        FAR:
-                        <input type="number" min={0.1} max={15} step={0.1} value={far} onChange={handleFarChange} />
-                    </label>
-                    <div>
-                        Lot Size
-                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 6 }}>
-                            <label>Width: <input type="number" min={10} max={400} value={siteWidth} onChange={handleSiteWidthChange} style={{ width: 60 }} /> ft </label>
-                            <label>Depth: <input type="number" min={10} max={400} value={siteDepth} onChange={handleSiteDepthChange} style={{ width: 60 }} /> ft </label>
-                        </div>
-                    </div>
-                    <div>
-                        Setbacks
-                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 6 }}>
-                            <label>Back: <input type="number" min={0} max={50} step={.5} value={setbacks.back} onChange={handleSetbackChange('back')} style={{ width: 60 }} /> ft </label>
-                            <label>Right: <input type="number" min={0} max={50} step={.5} value={setbacks.right} onChange={handleSetbackChange('right')} style={{ width: 60 }} /> ft </label>
-                            <label>Front: <input type="number" min={0} max={50} step={.5} value={setbacks.front} onChange={handleSetbackChange('front')} style={{ width: 60 }} /> ft </label>
-                            <label>Left: <input type="number" min={0} max={50} step={.5} value={setbacks.left} onChange={handleSetbackChange('left')} style={{ width: 60 }} /> ft </label>
-                        </div>
-                    </div>
-                    <label>
-                        Max Height:
-                        <input type="number" min={15} max={100} step={5} value={maxHeight} onChange={handleMaxHeightChange} />
-                        ft
-                    </label>
-                    <div>
-                        <label>
-                            Average Unit Size
-                            <input type='radio' name="unitCalc" value="Average Unit Size" onChange={handleUnitCalcTypeChange} />
-                        </label>
-                        <label>
-                            Max Units
-                            <input type='radio' name="unitCalc" value="Max Unit" onChange={handleUnitCalcTypeChange} />
-                        </label>
-                        <br></br>
-                        {unitCalc()}
-                    </div>
+    // // function variablePanel() {
+    //     return (
+    //         <div className="variable-panel">
+    //             <p>Adjust the parameters to see how they affect the building layout.</p>
+    //             {presetView()}
+    //             <div className='content-box'>
+    //                 <label>
+    //                     FAR:
+    //                     <input type="number" min={0.1} max={15} step={0.1} value={far} onChange={handleFarChange} />
+    //                 </label>
+    //                 <div>
+    //                     Lot Size
+    //                     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 6 }}>
+    //                         <label>Width: <input type="number" min={10} max={400} value={siteWidth} onChange={handleSiteWidthChange} style={{ width: 60 }} /> ft </label>
+    //                         <label>Depth: <input type="number" min={10} max={400} value={siteDepth} onChange={handleSiteDepthChange} style={{ width: 60 }} /> ft </label>
+    //                     </div>
+    //                 </div>
+    //                 <div>
+    //                     Setbacks
+    //                     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 6 }}>
+    //                         <label>Back: <input type="number" min={0} max={50} step={.5} value={setbacks.back} onChange={handleSetbackChange('back')} style={{ width: 60 }} /> ft </label>
+    //                         <label>Right: <input type="number" min={0} max={50} step={.5} value={setbacks.right} onChange={handleSetbackChange('right')} style={{ width: 60 }} /> ft </label>
+    //                         <label>Front: <input type="number" min={0} max={50} step={.5} value={setbacks.front} onChange={handleSetbackChange('front')} style={{ width: 60 }} /> ft </label>
+    //                         <label>Left: <input type="number" min={0} max={50} step={.5} value={setbacks.left} onChange={handleSetbackChange('left')} style={{ width: 60 }} /> ft </label>
+    //                     </div>
+    //                 </div>
+    //                 <label>
+    //                     Max Height:
+    //                     <input type="number" min={15} max={100} step={5} value={maxHeight} onChange={handleMaxHeightChange} />
+    //                     ft
+    //                 </label>
+    //                 <div>
+    //                     <label>
+    //                         Average Unit Size
+    //                         <input type='radio' name="unitCalc" value="Average Unit Size" onChange={handleUnitCalcTypeChange} />
+    //                     </label>
+    //                     <label>
+    //                         Max Units
+    //                         <input type='radio' name="unitCalc" value="Max Unit" onChange={handleUnitCalcTypeChange} />
+    //                     </label>
+    //                     <br></br>
+    //                     {unitCalc()}
+    //                 </div>
 
-                    {/* <label>
-                        Minimum Unit Size:
-                        <input type="number" min={150} max={averageUnitSize} step={50} value={minUnitSize} onChange={handleMinUnitSizeChange} />
-                    </label> */}
-                    <label>
-                        Open Space per Unit:
-                        <input type="number" min={0} max={averageUnitSize} step={10} value={openSpacePerUnit} onChange={handleOpenSpacePerUnitChange} />
-                    </label>
-                    <label>
-                        Parking Spaces per Unit:
-                        <input type="number" min={0} max={5} step={0.1} value={parkingPerUnit} onChange={handleParkingPerUnitsChange} />
-                    </label>
-                    {/* <label>
-                        Backing Ally
-                        <input type="checkbox" value={backingAlly} onChange={handleBackingAllyChange} />
-                    </label> */}
-                    <label>
-                        Max Coverage
-                        <input type="number" min={0.0} max={1.0} step={.05} value={maxCoverage} onChange={handleMaxCoverageChange}></input>
-                    </label>
-                </div>
-            </div>
-        );
-    }
+    //                 {/* <label>
+    //                     Minimum Unit Size:
+    //                     <input type="number" min={150} max={averageUnitSize} step={50} value={minUnitSize} onChange={handleMinUnitSizeChange} />
+    //                 </label> */}
+    //                 <label>
+    //                     Open Space per Unit:
+    //                     <input type="number" min={0} max={averageUnitSize} step={10} value={openSpacePerUnit} onChange={handleOpenSpacePerUnitChange} />
+    //                 </label>
+    //                 <label>
+    //                     Parking Spaces per Unit:
+    //                     <input type="number" min={0} max={5} step={0.1} value={parkingPerUnit} onChange={handleParkingPerUnitsChange} />
+    //                 </label>
+    //                 {/* <label>
+    //                     Backing Ally
+    //                     <input type="checkbox" value={backingAlly} onChange={handleBackingAllyChange} />
+    //                 </label> */}
+    //                 <label>
+    //                     Max Coverage
+    //                     <input type="number" min={0.0} max={1.0} step={.05} value={maxCoverage} onChange={handleMaxCoverageChange}></input>
+    //                 </label>
+    //             </div>
+    //         </div>
+    //     );
+    // }
 
     // function infoPanel() {
     //     return (
@@ -372,57 +375,57 @@ export default function VisualizerHook() {
         );
     }
 
-    function sideView() {
-        const elevationScale = ELEVATION_SCALE;
-        const lotHeightPx = maxHeight * elevationScale;
-        const lotDepthPx = siteDepth * elevationScale;
-        const buildingDepthPx = buildingDepth * elevationScale;
-        const buildingOffsetX = setbacks.front * elevationScale;
-        const visibleFloors = Math.max(1, Math.floor(buildingHeight / floorHeight));
+    // function sideView() {
+    //     const elevationScale = ELEVATION_SCALE;
+    //     const lotHeightPx = maxHeight * elevationScale;
+    //     const lotDepthPx = siteDepth * elevationScale;
+    //     const buildingDepthPx = buildingDepth * elevationScale;
+    //     const buildingOffsetX = setbacks.front * elevationScale;
+    //     const visibleFloors = Math.max(1, Math.floor(buildingHeight / floorHeight));
 
-        const sideW = lotDepthPx + 40;
-        const sideH = lotHeightPx + 40;
+    //     const sideW = lotDepthPx + 40;
+    //     const sideH = lotHeightPx + 40;
 
-        return (
-            <div className="side-view view">
-                <h2>Side View</h2>
-                <svg className="graph" width={sideW} height={sideH}>
-                    <defs>
-                        <pattern id="grid" width={elevationScale} height={elevationScale} patternUnits="userSpaceOnUse">
-                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#504f4fff" strokeWidth="0.5" />
-                        </pattern>
-                    </defs>
+    //     return (
+    //         <div className="side-view view">
+    //             <h2>Side View</h2>
+    //             <svg className="graph" width={sideW} height={sideH}>
+    //                 <defs>
+    //                     <pattern id="grid" width={elevationScale} height={elevationScale} patternUnits="userSpaceOnUse">
+    //                         <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#504f4fff" strokeWidth="0.5" />
+    //                     </pattern>
+    //                 </defs>
 
-                    <g transform={`translate(20, ${sideH - 20})`}>
-                        {Array.from({ length: visibleFloors }).map((_, i) => {
-                            const fh = floorHeight * elevationScale;
-                            const y = -((i + 1) * fh);
+    //                 <g transform={`translate(20, ${sideH - 20})`}>
+    //                     {Array.from({ length: visibleFloors }).map((_, i) => {
+    //                         const fh = floorHeight * elevationScale;
+    //                         const y = -((i + 1) * fh);
 
-                            const floorArea = buildingWidth * buildingDepth;
-                            const potentialBuildingArea = maxSiteArea;
-                            const buildingAreaSoFar = floorArea * (i);
-                            const topFloorArea = potentialBuildingArea - buildingAreaSoFar;
+    //                         const floorArea = buildingWidth * buildingDepth;
+    //                         const potentialBuildingArea = maxSiteArea;
+    //                         const buildingAreaSoFar = floorArea * (i);
+    //                         const topFloorArea = potentialBuildingArea - buildingAreaSoFar;
 
-                            if (i + 1 == visibleFloors && topFloorArea < floorArea) {
-                                const topFloorDepth = topFloorArea / buildingWidth;
-                                const topFloorDepthPx = topFloorDepth * elevationScale;
+    //                         if (i + 1 == visibleFloors && topFloorArea < floorArea) {
+    //                             const topFloorDepth = topFloorArea / buildingWidth;
+    //                             const topFloorDepthPx = topFloorDepth * elevationScale;
 
-                                if (topFloorArea < minUnitSize && !showOverflowArea) return null;
+    //                             if (topFloorArea < minUnitSize && !showOverflowArea) return null;
 
-                                return <rect key={i} x={buildingOffsetX} y={y} width={topFloorDepthPx} height={fh} fill={i % 2 === 0 ? '#90caf9' : '#64b5f6'} stroke="#1e88e5" />;
-                            }
+    //                             return <rect key={i} x={buildingOffsetX} y={y} width={topFloorDepthPx} height={fh} fill={i % 2 === 0 ? '#90caf9' : '#64b5f6'} stroke="#1e88e5" />;
+    //                         }
 
-                            return <rect key={i} x={buildingOffsetX} y={y} width={buildingDepthPx} height={fh} fill={i % 2 === 0 ? '#90caf9' : '#64b5f6'} stroke="#1e88e5" />;
-                        })}
+    //                         return <rect key={i} x={buildingOffsetX} y={y} width={buildingDepthPx} height={fh} fill={i % 2 === 0 ? '#90caf9' : '#64b5f6'} stroke="#1e88e5" />;
+    //                     })}
 
-                        <rect x={0} y={-lotHeightPx} width={lotDepthPx} height={lotHeightPx} fill="url(#grid)" pointerEvents="none" />
-                        <rect x={0} y={-lotHeightPx} width={lotDepthPx} height={lotHeightPx} fill="rgba(0,0,0,0)" stroke="#999" strokeDasharray="6 4" />
-                        <line x1={-10} y1={0} x2={lotDepthPx + 10} y2={0} stroke="#333" />
-                    </g>
-                </svg>
-            </div>
-        );
-    }
+    //                     <rect x={0} y={-lotHeightPx} width={lotDepthPx} height={lotHeightPx} fill="url(#grid)" pointerEvents="none" />
+    //                     <rect x={0} y={-lotHeightPx} width={lotDepthPx} height={lotHeightPx} fill="rgba(0,0,0,0)" stroke="#999" strokeDasharray="6 4" />
+    //                     <line x1={-10} y1={0} x2={lotDepthPx + 10} y2={0} stroke="#333" />
+    //                 </g>
+    //             </svg>
+    //         </div>
+    //     );
+    // }
 
     // function setPresets(key: string) {
     //     console.log("Set Preset: ", key);
@@ -446,41 +449,41 @@ export default function VisualizerHook() {
     //     )
     // }
 
-    function frontView() {
-        const elevationScale = ELEVATION_SCALE;
-        const lotHeightPx = maxHeight * elevationScale;
-        const lotWidthPx = siteWidth * elevationScale;
-        const buildingWidthPx = buildingWidth * elevationScale;
-        const buildingOffsetX = setbacks.left * elevationScale;
-        const visibleFloors = Math.max(1, Math.floor(buildingHeight / floorHeight));
+    // function frontView() {
+    //     const elevationScale = ELEVATION_SCALE;
+    //     const lotHeightPx = maxHeight * elevationScale;
+    //     const lotWidthPx = siteWidth * elevationScale;
+    //     const buildingWidthPx = buildingWidth * elevationScale;
+    //     const buildingOffsetX = setbacks.left * elevationScale;
+    //     const visibleFloors = Math.max(1, Math.floor(buildingHeight / floorHeight));
 
-        const frontW = lotWidthPx + 40;
-        const frontH = lotHeightPx + 40;
+    //     const frontW = lotWidthPx + 40;
+    //     const frontH = lotHeightPx + 40;
 
-        return (
-            <div className="front-view view">
-                <h2>Front View</h2>
-                <svg className="graph" width={frontW} height={frontH}>
-                    <defs>
-                        <pattern id="grid" width={elevationScale} height={elevationScale} patternUnits="userSpaceOnUse">
-                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#504f4fff" strokeWidth="0.5" />
-                        </pattern>
-                    </defs>
-                    <g transform={`translate(20, ${frontH - 20})`}>
-                        {Array.from({ length: visibleFloors }).map((_, i) => {
-                            const fh = floorHeight * elevationScale;
-                            const y = -((i + 1) * fh);
-                            return <rect key={i} x={buildingOffsetX} y={y} width={buildingWidthPx} height={fh} fill={i % 2 === 0 ? '#90caf9' : '#64b5f6'} stroke="#1e88e5" />;
-                        })}
+    //     return (
+    //         <div className="front-view view">
+    //             <h2>Front View</h2>
+    //             <svg className="graph" width={frontW} height={frontH}>
+    //                 <defs>
+    //                     <pattern id="grid" width={elevationScale} height={elevationScale} patternUnits="userSpaceOnUse">
+    //                         <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#504f4fff" strokeWidth="0.5" />
+    //                     </pattern>
+    //                 </defs>
+    //                 <g transform={`translate(20, ${frontH - 20})`}>
+    //                     {Array.from({ length: visibleFloors }).map((_, i) => {
+    //                         const fh = floorHeight * elevationScale;
+    //                         const y = -((i + 1) * fh);
+    //                         return <rect key={i} x={buildingOffsetX} y={y} width={buildingWidthPx} height={fh} fill={i % 2 === 0 ? '#90caf9' : '#64b5f6'} stroke="#1e88e5" />;
+    //                     })}
 
-                        <rect x={0} y={-lotHeightPx} width={lotWidthPx} height={lotHeightPx} fill="url(#grid)" pointerEvents="none" />
-                        <rect x={0} y={-lotHeightPx} width={lotWidthPx} height={lotHeightPx} fill="rgba(0,0,0,0)" stroke="#999" strokeDasharray="6 4" />
-                        <line x1={-10} y1={0} x2={lotWidthPx + 10} y2={0} stroke="#333" />
-                    </g>
-                </svg>
-            </div>
-        );
-    }
+    //                     <rect x={0} y={-lotHeightPx} width={lotWidthPx} height={lotHeightPx} fill="url(#grid)" pointerEvents="none" />
+    //                     <rect x={0} y={-lotHeightPx} width={lotWidthPx} height={lotHeightPx} fill="rgba(0,0,0,0)" stroke="#999" strokeDasharray="6 4" />
+    //                     <line x1={-10} y1={0} x2={lotWidthPx + 10} y2={0} stroke="#333" />
+    //                 </g>
+    //             </svg>
+    //         </div>
+    //     );
+    // }
 
     return (
         <div id='container'>

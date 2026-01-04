@@ -3,10 +3,10 @@
     flex-direction: row;
     /* justify-content: space-around; */
       height: 200px;
-  width: 100%;
   background-color: #a3b18a;
   border-bottom: 5px solid #588157;
   color: white;
+  /* width: 100%; */
 }
 
 #info-panel .content-box {
