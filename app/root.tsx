@@ -15,6 +15,12 @@ import presets from '../config/defaults.json';
 import configJson from '../config/config.json';
 
 
+// function redirectScript() {
+//   return (
+//     
+//   );
+// }
+
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
