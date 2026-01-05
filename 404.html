@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -33,6 +33,27 @@
         l.hash
       );
 
+    </script>
+  </head>
+  <body>
+  </body>
+</html> -->
+<!-- public/404.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FAR Visualizer</title>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      var l = window.location;
+      var redirect = l.pathname + l.search + l.hash;
+      if (redirect.startsWith('/FAR-Visualizer/')) {
+        redirect = redirect.substring('/FAR-Visualizer/'.length);
+      }
+      window.location = l.protocol + '//' + l.host + l.pathname.split('/').slice(0, -1).join('/') + '/?' + redirect;
     </script>
   </head>
   <body>
