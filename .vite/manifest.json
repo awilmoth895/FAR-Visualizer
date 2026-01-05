@@ -17,6 +17,15 @@
     "file": "assets/defaults-C3rAs04A.css",
     "src": "_defaults-C3rAs04A.css"
   },
+  "app/entry.client.tsx": {
+    "file": "assets/entry.client-5NZ9AFj8.js",
+    "name": "entry.client",
+    "src": "app/entry.client.tsx",
+    "isEntry": true,
+    "imports": [
+      "_chunk-B7RQU5TL-DkG0e22m.js"
+    ]
+  },
   "app/root.tsx?__react-router-build-client-route": {
     "file": "assets/root-DX83Ff4d.js",
     "name": "root",
@@ -46,14 +55,5 @@
   "assets/roof_texture.jpg": {
     "file": "assets/roof_texture-C-MNw0ba.jpg",
     "src": "assets/roof_texture.jpg"
-  },
-  "node_modules/@react-router/dev/dist/config/defaults/entry.client.tsx": {
-    "file": "assets/entry.client-5NZ9AFj8.js",
-    "name": "entry.client",
-    "src": "node_modules/@react-router/dev/dist/config/defaults/entry.client.tsx",
-    "isEntry": true,
-    "imports": [
-      "_chunk-B7RQU5TL-DkG0e22m.js"
-    ]
   }
 }
