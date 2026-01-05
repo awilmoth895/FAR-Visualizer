@@ -20,9 +20,25 @@
     /* margin: 0 0; */
 }
 
-#sidebar .content-box {
+#sidebar .variable-panel {
     border-bottom: 2px solid var(--sidebar-color-light);
     padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar .variable-panel > * {
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    /* margin: 10px 0; */
+    padding-bottom: 10px;
+}
+
+
+
+#sidebar .content-box div div {
+    margin-left: 10px;
 }
 
 .preset-button {
@@ -30,3 +46,4 @@
     margin: 5px;
     /* color: red; */
 }
+

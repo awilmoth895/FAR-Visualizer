@@ -56,7 +56,8 @@ export default function sidebar() {
     const handleMaxCoverageChange = (e: React.ChangeEvent<HTMLInputElement>) => setMaxCoverage(Number(e.target.value));
 
     const handleSetbackChange = (side: keyof typeof setbacks) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        const val = Number(e);
+        const val = Number(e.target.value);
+        console.log("Setback Change: ", side, val);
         setSetbacks({ ...(setbacks ?? {}), [side]: val });
     };
 
@@ -89,6 +90,11 @@ export default function sidebar() {
         // console.log("preset.zoning: ", presetsJson.zoning);
         setPreset(presetsJson.zoning[key].title);
         setEverything(presetsJson.zoning[key]);
+        if (presetsJson.zoning[key].maxUnits != -1) {
+            setUnitCalcType("Max Unit");
+        } else {
+            setUnitCalcType("Average Unit Size");
+        }
         // handlePresetChange(presets.zoning[key].title);
 
     }
@@ -116,7 +122,7 @@ export default function sidebar() {
 
     function unitCalc() {
 
-        if (unitCalcType == "Average Unit Size") {
+        if (unitCalcType == "Average Unit Size" || maxUnits == -1) {
             return (
                 <label>
                     Average Unit Size:
@@ -130,13 +136,31 @@ export default function sidebar() {
             <label>
                 Max Units:
                 <input type="number" min={0} max={50} step={1} value={maxUnits} onChange={handleMaxUnitChange} />
-                sqft
             </label>
         );
-
-
     }
 
+
+    function unitCalcMethod() {
+
+        return (
+            <div>
+                Unit Calculation Method:
+                <div>
+                    <label>
+                        Average Unit Size
+                        <input defaultChecked type='radio' name="unitCalc" value="Average Unit Size" onChange={handleUnitCalcTypeChange} />
+                    </label>
+                    <label>
+                        Max Units
+                        <input  type='radio' name="unitCalc" value="Max Unit" onChange={handleUnitCalcTypeChange} />
+                    </label>
+                    <br></br>
+                    {unitCalc()}
+                </div>
+            </div>
+        );
+    }
 
     function variablePanel() {
         return (
@@ -146,7 +170,7 @@ export default function sidebar() {
                     <span>Adjust the parameters to see how they affect the building layout.</span>
                 </div>
                 {/* {presetView()} */}
-                <div className='content-box'>
+                <div className='content-box variable-panel'>
                     <label>
                         FAR:
                         <input type="number" min={0.1} max={15} step={0.1} value={far} onChange={handleFarChange} />
@@ -161,10 +185,10 @@ export default function sidebar() {
                     <div>
                         Setbacks
                         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 6 }}>
-                            <label>Back: <input type="number" min={0} max={50} step={.5} value={setbacks.back} onChange={handleSetbackChange('back')} style={{ width: 60 }} /> ft </label>
-                            <label>Right: <input type="number" min={0} max={50} step={.5} value={setbacks.right} onChange={handleSetbackChange('right')} style={{ width: 60 }} /> ft </label>
-                            <label>Front: <input type="number" min={0} max={50} step={.5} value={setbacks.front} onChange={handleSetbackChange('front')} style={{ width: 60 }} /> ft </label>
-                            <label>Left: <input type="number" min={0} max={50} step={.5} value={setbacks.left} onChange={handleSetbackChange('left')} style={{ width: 60 }} /> ft </label>
+                            <label>Back: <input type="number" min={0} max={50} step={.5} value={setbacks.back} onChange={handleSetbackChange('back')} style={{ width: 40 }} /> ft </label>
+                            <label>Right: <input type="number" min={0} max={50} step={.5} value={setbacks.right} onChange={handleSetbackChange('right')} style={{ width: 40 }} /> ft </label>
+                            <label>Front: <input type="number" min={0} max={50} step={.5} value={setbacks.front} onChange={handleSetbackChange('front')} style={{ width: 40 }} /> ft </label>
+                            <label>Left: <input type="number" min={0} max={50} step={.5} value={setbacks.left} onChange={handleSetbackChange('left')} style={{ width: 40 }} /> ft </label>
                         </div>
                     </div>
                     <label>
@@ -172,18 +196,7 @@ export default function sidebar() {
                         <input type="number" min={15} max={100} step={5} value={maxHeight} onChange={handleMaxHeightChange} />
                         ft
                     </label>
-                    <div>
-                        <label>
-                            Average Unit Size
-                            <input type='radio' name="unitCalc" value="Average Unit Size" onChange={handleUnitCalcTypeChange} />
-                        </label>
-                        <label>
-                            Max Units
-                            <input type='radio' name="unitCalc" value="Max Unit" onChange={handleUnitCalcTypeChange} />
-                        </label>
-                        <br></br>
-                        {unitCalc()}
-                    </div>
+                    {unitCalcMethod()}
 
                     {/* <label>
                         Minimum Unit Size:
