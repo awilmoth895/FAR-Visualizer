@@ -7,13 +7,14 @@
     margin: 0;
     border-bottom: 5px solid var(--header-color-dark);
     position: sticky;
-    width: 100%;
     top: 0;
+    display: flex;
 }
 
 #header-title-container {
     display: flex;
     align-items: center;
+    flex: 1;
 }
 
 #header-title {
@@ -24,4 +25,25 @@
 
 #header-icon {
     /* height: 100px; */
+}
+
+#header-links {
+    display: flex;
+    align-items: center;
+}
+
+#github-icon {
+    height: 30px;
+    margin-right: 5px;
+}
+
+#github-link {
+    display: flex;
+    align-items: center;
+    color: var(--text-color-light);
+    text-decoration: none;
+}
+
+#github-link:hover {
+    opacity: 0.7;
 }

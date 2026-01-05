@@ -47,3 +47,6 @@
     /* color: red; */
 }
 
+button.preset-button:hover {
+    cursor: pointer;
+}
