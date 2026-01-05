@@ -1,59 +1,18 @@
 {
-  "_chunk-B7RQU5TL-DkG0e22m.js": {
-    "file": "assets/chunk-B7RQU5TL-DkG0e22m.js",
-    "name": "chunk-B7RQU5TL"
-  },
-  "_defaults-BsxgF3tv.js": {
-    "file": "assets/defaults-BsxgF3tv.js",
-    "name": "defaults",
-    "imports": [
-      "_chunk-B7RQU5TL-DkG0e22m.js"
-    ],
-    "css": [
-      "assets/defaults-C3rAs04A.css"
-    ]
-  },
-  "_defaults-C3rAs04A.css": {
-    "file": "assets/defaults-C3rAs04A.css",
-    "src": "_defaults-C3rAs04A.css"
-  },
-  "app/root.tsx?__react-router-build-client-route": {
-    "file": "assets/root-DX83Ff4d.js",
-    "name": "root",
-    "src": "app/root.tsx?__react-router-build-client-route",
-    "isEntry": true,
-    "imports": [
-      "_chunk-B7RQU5TL-DkG0e22m.js",
-      "_defaults-BsxgF3tv.js"
-    ]
-  },
-  "app/routes/visualizer-hook.tsx?__react-router-build-client-route": {
-    "file": "assets/visualizer-hook-DZObyvci.js",
-    "name": "visualizer-hook",
-    "src": "app/routes/visualizer-hook.tsx?__react-router-build-client-route",
-    "isEntry": true,
-    "imports": [
-      "_chunk-B7RQU5TL-DkG0e22m.js",
-      "_defaults-BsxgF3tv.js"
-    ],
-    "css": [
-      "assets/visualizer-hook-Bt-qQkF0.css"
-    ],
-    "assets": [
-      "assets/roof_texture-C-MNw0ba.jpg"
-    ]
-  },
   "assets/roof_texture.jpg": {
     "file": "assets/roof_texture-C-MNw0ba.jpg",
     "src": "assets/roof_texture.jpg"
   },
-  "node_modules/@react-router/dev/dist/config/defaults/entry.client.tsx": {
-    "file": "assets/entry.client-5NZ9AFj8.js",
-    "name": "entry.client",
-    "src": "node_modules/@react-router/dev/dist/config/defaults/entry.client.tsx",
+  "virtual:react-router/server-build": {
+    "file": "index.js",
+    "name": "server-build",
+    "src": "virtual:react-router/server-build",
     "isEntry": true,
-    "imports": [
-      "_chunk-B7RQU5TL-DkG0e22m.js"
+    "css": [
+      "assets/server-build-Z2suGHFS.css"
+    ],
+    "assets": [
+      "assets/roof_texture-C-MNw0ba.jpg"
     ]
   }
 }
