@@ -9,6 +9,7 @@ import infoPanel from '../../components/infoPanel';
 import sideView from '../../components/views/sideView';
 import frontView from '../../components/views/frontView';
 import topdownView from '../../components/views/topdownView';
+import isometricView from 'components/views/isometricView';
 import { useZoningContext } from '~/context/ZoningContext';
 
 // site defaults (kept here for initial hook values)
@@ -497,9 +498,10 @@ export default function VisualizerHook() {
                         {infoPanel()}
                     </div>
                     <div id="visualization-container">
+                        {isometricView()}
                         {topdownView()}
-                        {frontView()}
-                        {sideView()}
+                        {/* {frontView()} */}
+                        {/* {sideView()} */}
                     </div>
 
                 </div>

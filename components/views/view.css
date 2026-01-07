@@ -54,3 +54,15 @@ line {
 #roof {
     background: url("../../assets/roof_texture.jpg");
 }
+
+.building.side {
+    fill: blue;
+}
+
+.building.front {
+    fill: yellow;
+}
+
+.building.top {
+    fill: red;
+}

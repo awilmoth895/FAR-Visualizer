@@ -64,7 +64,7 @@ export default function frontView() {
 
                     <rect x={0} y={-lotHeightPx} width={lotWidthPx} height={lotHeightPx} fill="url(#grid)" pointerEvents="none" />
                     <rect className="outer-stroke" x={0} y={-lotHeightPx} width={lotWidthPx} height={lotHeightPx} />
-                    <line className="ground-line"x1={-10} y1={0} x2={lotWidthPx + 10} y2={0} />
+                    <line className="ground-line"x1={-10} y1={0} x2={lotWidthPx + 10} y2={0} />         
                 </g>
             </svg>
         </div>
