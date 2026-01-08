@@ -1,12 +1,12 @@
 {
     "init": {
         "siteWidth": 50,
-        "siteDepth": 75,
-        "maxHeight": 35,
+        "siteDepth": 50,
+        "maxHeight": 20,
         "floorHeight": 10,
-        "maxFar": 2.0,
+        "far": 2,
         
-        "setbacks": { "front": 12.5, "right": 3, "back": 10, "left": 3 },
+        "setbacks": { "front": 5, "right": 5, "back": 5, "left": 5 },
 
         "averageUnitSize": 800,
         "minUnitSize": 500,
@@ -17,7 +17,7 @@
         "parkingWidth": 8.6,
         "laneWidth": 12,
 
-        "openSpacePerUnit": 75,
+        "openSpacePerUnit": 0,
 
         "elevationScale": 10
     },
