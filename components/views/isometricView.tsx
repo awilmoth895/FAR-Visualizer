@@ -75,25 +75,50 @@ export default function isometricView() {
 
     const topMatrix = new DOMMatrixReadOnly()
         .translate(20, 450)
-        .translate(0, (- buildingHeight) * scale);
+        // .translate(0, (- buildingHeight) * scale)
+
 
     const frontMatrix = new DOMMatrixReadOnly()
+        
         .translate(20, 450)
+        .skewX(45)
+
+        .translate(0, buildingHeight * scale)
+
+        // .translate(0, -buildingHeight * scale)
+        // .translate(0, buildingHeight * scale)
+
+        // .translate(20, 450)
+
+        // .translate(((buildingWidth/2) * scale), 0)
 
     // .translate(20, frontH - 20)
     // .translate(300, (siteDepth + floorHeight - buildingHeight - setbacks.front - setbacks.back) * scale)
     // .skewX(45);
 
-    const sideMatrix = new DOMMatrixReadOnly()
+    const sideMatrix = new DOMMatrix()
 
     .translate(20, 450)
-    // .rotate(10, -buildingDepthPx, -buildingHeight * scale)
+    .skewY(-45)
+
+    .translate(-buildingHeight * scale)
+    // .translate(buildingWidthPx, 0)
+
+        // .translate()
+
+    // .translate(-(buildingHeight/2) * scale, 0)
+    // .translate(-(buildingDepth * scale))
+
+    // .translate((buildingHeight/2) * scale)
+    // .translate(0, -((floorHeight/2)*scale))
+    // .translate(buildingOffsetX, 0)
+
+    // .rotate(10, scale)
+
 
     // .translate(20, sideH - 20)
 
     // .translate((buildingWidth * scale), -(buildingHeight * scale))
-    // .skewY(45)
-    // .translate()
 
 
 
@@ -150,7 +175,8 @@ export default function isometricView() {
     return (
         <div className="isometric-view view">
             <h2>Front View</h2>
-            <svg className="graph" width={frontW + sideD} height={frontH + sideH} >
+            {/* <svg className="graph" width={frontW + sideD} height={frontH + sideH} transform={isoMatrix}> */}
+            <svg className="graph" width={frontW + sideD} height={frontH + sideH}>
                 <defs>
                     <pattern id="grid" width={scale} height={scale} patternUnits="userSpaceOnUse">
                         <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#504f4fff" strokeWidth="0.5" />
@@ -182,28 +208,28 @@ export default function isometricView() {
                 </g>
 
 
-                <g transform={sideMatrix}>
+                <g transform={sideMatrix.toString()}>
                     {Array.from({ length: visibleFloors }).map((_, i) => {
                         const fh = floorHeight * scale;
-                        const y = -((i + 1) * fh);
+                        const y = -((i) * fh);
 
                         const floorArea = buildingWidth * buildingDepth;
                         const potentialBuildingArea = maxSiteArea;
                         const buildingAreaSoFar = floorArea * (i);
-                        const topFloorArea = potentialBuildingArea - buildingAreaSoFar;
+                        // const topFloorArea = potentialBuildingArea - buildingAreaSoFar;
 
-                        if (i + 1 == visibleFloors && topFloorArea < floorArea) {
-                            const topFloorDepth = topFloorArea / buildingWidth;
-                            const topFloorDepthPx = topFloorDepth * scale;
+                        // if (i + 1 == visibleFloors && topFloorArea < floorArea) {
+                        //     const topFloorDepth = topFloorArea / buildingWidth;
+                        //     const topFloorDepthPx = topFloorDepth * scale;
 
-                            if (topFloorArea < minUnitSize && !showOverflowArea) return null;
+                        //     if (topFloorArea < minUnitSize && !showOverflowArea) return null;
 
-                            return <rect className="building side" key={i} x={buildingOffsetX} y={y} width={topFloorDepthPx} height={fh} />;
-                            // return <rect className="building side" key={i} x={buildingOffsetX} y={y} width={fh} height={topFloorDepthPx} />;
-                        }
+                        //     // return <rect className="building side" key={i} x={buildingOffsetX} y={y} width={topFloorDepthPx} height={fh} />;
+                        //     return <rect className="building side" key={i} x={buildingOffsetX} y={y} width={fh} height={topFloorDepthPx} />;
+                        // }
 
-                        return <rect className="building side" key={i} x={buildingOffsetX} y={y} width={buildingDepthPx} height={fh} />;
-                        // return <rect className="building side" key={i} x={buildingOffsetX} y={y} width={fh} height={buildingDepthPx} />;
+                        // return <rect className="building side" key={i} x={buildingOffsetX} y={y} width={buildingDepthPx} height={fh} />;
+                        return <rect className="building side" key={i} x={buildingOffsetX - y} y={-buildingDepthPx} width={fh} height={buildingDepthPx} />;
                     })}
 
                     {/* <rect x={0} y={-lotHeightPx} width={lotDepthPx} height={lotHeightPx} fill="url(#grid)" pointerEvents="none" /> */}
@@ -212,7 +238,7 @@ export default function isometricView() {
                 </g>
 
                 <g transform={topMatrix}>
-                    <rect className="building top" x={buildingOffsetX} y={-(buildingDepthPx)} width={buildingWidthPx} height={buildingDepthPx} fill="url(#buildingTexture)" />
+                    <rect className="building top" x={buildingOffsetX} y={-(buildingDepthPx)} width={buildingWidthPx} height={buildingDepthPx} />
 
                     {/* <rect x={0} y={-lotDepthPx} width={lotWidthPx} height={lotDepthPx} fill="url(#grid)" pointerEvents="none" /> */}
 
