@@ -3,12 +3,14 @@
 
 
 .isometric-view {
-    outline: auto;
+    /* outline: auto; */
 }
 
 .iso {
     /* stroke: red; */
-    scale: 1
+    /* scale: 1 */
+    /* display: flex; */
+    /* position: inherit; */
 }
 
 rect {

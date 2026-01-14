@@ -3,14 +3,15 @@ import React, { useState, type HtmlHTMLAttributes, useCallback } from 'react';
 import './../app.css';
 import useZoningCalculator from '../../utils/useZoningCalculator';
 import presets from '../../config/defaults.json';
-import header from '../../components/header';
-import sidebar from '../../components/sidebar';
-import infoPanel from '../../components/infoPanel';
-import sideView from '../../components/views/sideView';
-import frontView from '../../components/views/frontView';
-import topdownView from '../../components/views/topdownView';
-import isometricView from 'components/views/isometricView';
-import { useZoningContext } from '~/context/ZoningContext';
+import Header from '../../components/header';
+import Sidebar from '../../components/sidebar';
+import InfoPanel from '../../components/infoPanel';
+import SideView from '../../components/views/sideView';
+import FrontView from '../../components/views/frontView';
+import TopdownView from '../../components/views/topdownView';
+import IsometricView from '../../components/views/isometricView';
+import { useZoningContext } from '../context/ZoningContext';
+import { useConfigContext } from '../context/ConfigContext';
 
 // site defaults (kept here for initial hook values)
 const SITE_WIDTH = 40; // feet
@@ -96,6 +97,11 @@ export default function VisualizerHook() {
 
         setEverything
     } = useZoningContext();
+
+    const {
+        scale, setScale,
+        views, setViews
+    } = useConfigContext();
 
     // local UI-only flags
     const [showOverflowArea, setShowOverflowArea] = useState(SHOW_OVERFLOW_AREA);
@@ -488,20 +494,20 @@ export default function VisualizerHook() {
 
     return (
         <div id='container'>
-            {header()}
+            <Header />
             <div className="main-container">
                 <div id="sidebar-container">
-                    {sidebar()}
+                    <Sidebar />
                 </div>
                 <div id="visualization-info-container">
                     <div className='info-panel-container'>
-                        {infoPanel()}
+                        <InfoPanel />
                     </div>
                     <div id="visualization-container">
-                        {isometricView()}
-                        {topdownView()}
-                        {/* {frontView()} */}
-                        {/* {sideView()} */}
+                        {views.iso && <IsometricView />}
+                        {views.topDown && <TopdownView />}
+                        {views.front && <FrontView />}
+                        {views.side && <SideView />}
                     </div>
 
                 </div>

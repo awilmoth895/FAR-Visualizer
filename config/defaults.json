@@ -1,8 +1,8 @@
 {
     "init": {
-        "siteWidth": 50,
-        "siteDepth": 50,
-        "maxHeight": 20,
+        "siteWidth": 40,
+        "siteDepth": 75,
+        "maxHeight": 35,
         "floorHeight": 10,
         "far": 2,
         

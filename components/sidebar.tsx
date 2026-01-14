@@ -30,7 +30,8 @@ export default function sidebar() {
     } = useZoningContext();
 
     const {
-        scale, setScale
+        scale, setScale,
+        views, setViews
     }  = useConfigContext();
 
 
@@ -76,6 +77,12 @@ export default function sidebar() {
             setMaxUnits(1)
         }
         setAverageUnitSize(buildingArea / tempMaxUnits);
+    }
+
+    const handleViewChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.checked;
+        const name = e.target.name;
+        setViews(values => ({...values, [name]: value}));
     }
 
     // compute derived building sizes on render
@@ -228,11 +235,32 @@ export default function sidebar() {
         return (
             <div className="sidebar-section" id="config">
                 <h2 className="sidebar-title">Settings</h2>
-                <div className='content-box'>
+                <div className='content-box variable-panel'>
                     <label>
                         Scale: 
                         <input type="number" min={1} max={50} step={1} value={scale} onChange={(e) => setScale(parseFloat(e.target.value))} />    
-                    </label>                    
+                    </label>
+                    <label>
+                        Views
+                        <div className="variable-panel">
+                            <label>
+                                <input name="topDown" type="checkbox" checked={views.topDown} onChange={handleViewChecked}></input>
+                                Top Down
+                            </label>
+                            <label>
+                                <input name="front" type="checkbox" checked={views.front} onChange={handleViewChecked}></input>
+                                Front
+                            </label>
+                            <label>
+                                <input name="side" type="checkbox" checked={views.side} onChange={handleViewChecked}></input>
+                                Side
+                            </label>
+                            <label>
+                                <input name="iso" type="checkbox" checked={views.iso} onChange={handleViewChecked}></input>
+                                Isometric
+                            </label>
+                        </div>
+                    </label>
                 </div>
             </div>
         );

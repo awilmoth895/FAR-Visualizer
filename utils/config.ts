@@ -2,11 +2,20 @@ import { useState } from "react";
 import configJson from "../config/config.json";
 
 type ConfigContextType = typeof configJson;
+// export type Views = [string];
+
 
 export function useConfig(init: ConfigContextType) {
     const [scale, setScale] = useState(init.scale || 10);
+    const [views, setViews] = useState(init.views || {
+        "topDown": false,
+        "side": false,
+        "front": false,
+        "iso": false
+    });
 
     return {
-        scale, setScale
+        scale, setScale,
+        views, setViews
     } as const
 }
