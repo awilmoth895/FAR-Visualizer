@@ -1,8 +1,14 @@
 
 @import url("../../config/variables.css");
 
-.graph {
+
+.isometric-view {
+    outline: auto;
+}
+
+.iso {
     /* stroke: red; */
+    scale: 1
 }
 
 rect {

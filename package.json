@@ -16,6 +16,7 @@
     "@react-router/node": "^7.7.1",
     "@react-router/serve": "^7.7.1",
     "isbot": "^5.1.27",
+    "isometric-react": "^1.1.5",
     "nodemon": "^3.1.11",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
