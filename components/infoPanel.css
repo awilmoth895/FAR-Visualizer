@@ -3,23 +3,32 @@
 #info-panel {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-around; */
+    justify-content: left;
     height: 200px;
     background-color: var(--info-color);
     border-bottom: 5px solid var(--info-color-dark);
     color: var(--text-color-light);
     /* width: 100%; */
+    /* overflow-x: scroll; */
+
 }
 
-#info-panel .content-box {
+#info-panel .info-section {
     /* flex: 1; */
     /* padding: 0px 20px; */
     border-right: 2px solid var(--info-color-light);
-    /* margin: 10px; */
+    margin: 10px;
 }
 
-h2 {
+.info-title {
     /* margin-top: 10px; */
-    margin-top: 10px;
-    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    /* padding-top: 10px; */
+    margin: 0 0;
+    /* padding-bottom: 5px; */
+}
+
+.info-section .content-box div {
+    /* margin-left: 10px; */
 }

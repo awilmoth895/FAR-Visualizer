@@ -2,9 +2,10 @@
 
 #sidebar {
     background-color: var(--sidebar-color);
-    height: 100vh;
+    /* height: 100vh; */
     border-right: 5px solid var(--sidebar-color-dark);
     color: var(--text-color-light);
+    overflow-y: scroll;
 }
 
 .sidebar-title {
