@@ -1,0 +1,37 @@
+.section {
+    margin: 10px 10px;
+}
+
+.section .title {
+    padding-left: 5px;
+    padding-bottom: 10px;
+    margin: 0 0;
+    padding-right: 5px;
+}
+
+.section .description {
+    font-size: 14px;
+    padding-left: 5px;
+}
+
+.section .content-box {
+    flex: 1;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.section .content-box label {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.section .content-box > label  label:last-child {
+    padding-bottom: 0px;
+}
+
+.section .content-box .variable {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}

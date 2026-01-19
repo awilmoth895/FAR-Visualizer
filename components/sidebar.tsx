@@ -4,6 +4,7 @@ import "./sidebar.css";
 import presetsJson from '../config/defaults.json';
 import { useZoningContext } from "../app/context/ZoningContext";
 import { useConfigContext } from "../app/context/ConfigContext";
+import Section from "./parts/section";
 
 export default function sidebar() {
     const {
@@ -111,19 +112,15 @@ export default function sidebar() {
 
 
         return (
-            <div className="sidebar-section" id="presets-container">
-                <h2 className="sidebar-title">Presets</h2>
-                <div className="description-box">{preset}</div>
-                <div className="content-box">
-                    {Array.from(presetNames).map((name, i) => {
-                        return (
-                            <div key={i} className="preset-item">
-                                <button className='preset-button' onClick={() => setPresets(name)}>{presetsJson.zoning[name].title}</button>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
+            <Section title="Presets" description={preset}>
+                {Array.from(presetNames).map((name, i) => {
+                    return (
+                        <div key={i} className="preset-item">
+                            <button className='preset-button' onClick={() => setPresets(name)}>{presetsJson.zoning[name].title}</button>
+                        </div>
+                    );
+                })}
+            </Section>
         );
     }
 
@@ -151,118 +148,109 @@ export default function sidebar() {
     function unitCalcMethod() {
 
         return (
-            <div>
+            <label>
                 Unit Calculation Method:
-                <div>
+                <div className="variable">
                     <label>
-                        Average Unit Size
                         <input defaultChecked type='radio' name="unitCalc" value="Average Unit Size" onChange={handleUnitCalcTypeChange} />
+                        Average Unit Size
                     </label>
                     <label>
-                        Max Units
                         <input  type='radio' name="unitCalc" value="Max Unit" onChange={handleUnitCalcTypeChange} />
+                        Max Units
                     </label>
-                    <br></br>
-                    {unitCalc()}
                 </div>
-            </div>
+                {unitCalc()}
+            </label>
         );
     }
 
     function variablePanel() {
         return (
-            <div className="sidebar-section" id="variable-container">
-                <h2 className="sidebar-title">Parameters</h2>
-                <div className='description-box'>
-                    <span>Adjust the parameters to see how they affect the building layout.</span>
-                </div>
-                {/* {presetView()} */}
-                <div className='content-box variable-panel'>
-                    <label>
-                        FAR:
-                        <input type="number" min={0.1} max={15} step={0.1} value={far} onChange={handleFarChange} />
-                    </label>
-                    <div>
-                        Lot Size
-                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 6 }}>
-                            <label>Width: <input type="number" min={10} max={400} value={siteWidth} onChange={handleSiteWidthChange} style={{ width: 60 }} /> ft </label>
-                            <label>Depth: <input type="number" min={10} max={400} value={siteDepth} onChange={handleSiteDepthChange} style={{ width: 60 }} /> ft </label>
-                        </div>
+            <Section title="Parameters" description="Adjust the parameters to see how they affect the building layout.">
+                <label>
+                    FAR:
+                    <input type="number" min={0.1} max={15} step={0.1} value={far} onChange={handleFarChange} />
+                </label>
+                <label>
+                    Lot Size
+                    <div className="variable">
+                        <label>Width: <input type="number" min={10} max={400} value={siteWidth} onChange={handleSiteWidthChange} style={{ width: 60 }} /> ft </label>
+                        <label>Depth: <input type="number" min={10} max={400} value={siteDepth} onChange={handleSiteDepthChange} style={{ width: 60 }} /> ft </label>
                     </div>
-                    <div>
-                        Setbacks
-                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 6 }}>
-                            <label>Back: <input type="number" min={0} max={50} step={.5} value={setbacks.back} onChange={handleSetbackChange('back')} style={{ width: 40 }} /> ft </label>
-                            <label>Right: <input type="number" min={0} max={50} step={.5} value={setbacks.right} onChange={handleSetbackChange('right')} style={{ width: 40 }} /> ft </label>
-                            <label>Front: <input type="number" min={0} max={50} step={.5} value={setbacks.front} onChange={handleSetbackChange('front')} style={{ width: 40 }} /> ft </label>
-                            <label>Left: <input type="number" min={0} max={50} step={.5} value={setbacks.left} onChange={handleSetbackChange('left')} style={{ width: 40 }} /> ft </label>
-                        </div>
+                </label>
+                <label>
+                    Setbacks
+                    <div className="variable">
+                        <label>Back: <input type="number" min={0} max={50} step={.5} value={setbacks.back} onChange={handleSetbackChange('back')} style={{ width: 40 }} /> ft </label>
+                        <label>Right: <input type="number" min={0} max={50} step={.5} value={setbacks.right} onChange={handleSetbackChange('right')} style={{ width: 40 }} /> ft </label>
+                        <label>Front: <input type="number" min={0} max={50} step={.5} value={setbacks.front} onChange={handleSetbackChange('front')} style={{ width: 40 }} /> ft </label>
+                        <label>Left: <input type="number" min={0} max={50} step={.5} value={setbacks.left} onChange={handleSetbackChange('left')} style={{ width: 40 }} /> ft </label>
                     </div>
-                    <label>
-                        Max Height:
-                        <input type="number" min={15} max={100} step={5} value={maxHeight} onChange={handleMaxHeightChange} />
-                        ft
-                    </label>
-                    {unitCalcMethod()}
+                </label>
+                <label>
+                    Max Height:
+                    <input type="number" min={15} max={100} step={5} value={maxHeight} onChange={handleMaxHeightChange} />
+                    ft
+                </label>
+                {unitCalcMethod()}
 
-                    {/* <label>
-                        Minimum Unit Size:
-                        <input type="number" min={150} max={averageUnitSize} step={50} value={minUnitSize} onChange={handleMinUnitSizeChange} />
-                    </label> */}
-                    <label>
-                        Open Space per Unit:
-                        <input type="number" min={0} max={averageUnitSize} step={10} value={openSpacePerUnit} onChange={handleOpenSpacePerUnitChange} />
-                    </label>
-                    <label>
-                        Parking Spaces per Unit:
-                        <input type="number" min={0} max={5} step={0.1} value={parkingPerUnit} onChange={handleParkingPerUnitsChange} />
-                    </label>
-                    {/* <label>
-                        Backing Ally
-                        <input type="checkbox" value={backingAlly} onChange={handleBackingAllyChange} />
-                    </label> */}
-                    <label>
-                        Max Coverage
-                        <input type="number" min={0.0} max={1.0} step={.05} value={maxCoverage} onChange={handleMaxCoverageChange}></input>
-                    </label>
-                </div>
-            </div>
+                {/* <label>
+                    Minimum Unit Size:
+                    <input type="number" min={150} max={averageUnitSize} step={50} value={minUnitSize} onChange={handleMinUnitSizeChange} />
+                </label> */}
+                <label>
+                    Open Space per Unit:
+                    <input type="number" min={0} max={averageUnitSize} step={10} value={openSpacePerUnit} onChange={handleOpenSpacePerUnitChange} />
+                </label>
+                <label>
+                    Parking Spaces per Unit:
+                    <input type="number" min={0} max={5} step={0.1} value={parkingPerUnit} onChange={handleParkingPerUnitsChange} />
+                </label>
+                {/* <label>
+                    Backing Ally
+                    <input type="checkbox" value={backingAlly} onChange={handleBackingAllyChange} />
+                </label> */}
+                <label>
+                    Max Coverage
+                    <input type="number" min={0.0} max={1.0} step={.05} value={maxCoverage} onChange={handleMaxCoverageChange}></input>
+                </label>
+            </Section>
         );
     }
 
 
     function config() {
         return (
-            <div className="sidebar-section" id="config">
-                <h2 className="sidebar-title">Settings</h2>
-                <div className='content-box variable-panel'>
-                    <label>
-                        Scale: 
-                        <input type="number" min={1} max={50} step={1} value={scale} onChange={(e) => setScale(parseFloat(e.target.value))} />    
-                    </label>
-                    <label>
-                        Views
-                        <div className="variable-panel">
-                            <label>
-                                <input name="topDown" type="checkbox" checked={views.topDown} onChange={handleViewChecked}></input>
-                                Top Down
-                            </label>
-                            <label>
-                                <input name="front" type="checkbox" checked={views.front} onChange={handleViewChecked}></input>
-                                Front
-                            </label>
-                            <label>
-                                <input name="side" type="checkbox" checked={views.side} onChange={handleViewChecked}></input>
-                                Side
-                            </label>
-                            <label>
-                                <input name="iso" type="checkbox" checked={views.iso} onChange={handleViewChecked}></input>
-                                Isometric
-                            </label>
-                        </div>
-                    </label>
-                </div>
-            </div>
+            <Section 
+                title="Settings"
+                description="Adjust the visualization settings.">
+                <label>
+                    Scale: 
+                    <input type="number" min={1} max={50} step={1} value={scale} onChange={(e) => setScale(parseFloat(e.target.value))} />    
+                </label>
+                <label>
+                    Views
+                    <div className="variable">
+                        <label>
+                            <input name="topDown" type="checkbox" checked={views.topDown} onChange={handleViewChecked}></input>
+                            Top Down
+                        </label>
+                        <label>
+                            <input name="front" type="checkbox" checked={views.front} onChange={handleViewChecked}></input>
+                            Front
+                        </label>
+                        <label>
+                            <input name="side" type="checkbox" checked={views.side} onChange={handleViewChecked}></input>
+                            Side
+                        </label>
+                        <label>
+                            <input name="iso" type="checkbox" checked={views.iso} onChange={handleViewChecked}></input>
+                            Isometric
+                        </label>
+                    </div>
+                </label>
+            </Section>
         );
     }
 

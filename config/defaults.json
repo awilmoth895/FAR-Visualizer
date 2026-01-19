@@ -6,7 +6,7 @@
         "floorHeight": 10,
         "far": 2,
         
-        "setbacks": { "front": 5, "right": 5, "back": 5, "left": 5 },
+        "setbacks": { "front": 12.5, "right": 3, "back": 10, "left": 3 },
 
         "averageUnitSize": 800,
         "minUnitSize": 500,
@@ -17,7 +17,7 @@
         "parkingWidth": 8.6,
         "laneWidth": 12,
 
-        "openSpacePerUnit": 0,
+        "openSpacePerUnit": 75,
 
         "elevationScale": 10
     },

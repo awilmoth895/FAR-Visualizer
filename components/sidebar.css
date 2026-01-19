@@ -8,39 +8,13 @@
     overflow-y: scroll;
 }
 
-.sidebar-title {
-    padding-left: 10px;
-    padding-bottom: 10px;
-    /* padding-top: 10px; */
-    margin: 0 0;
-}
-
-.description-box {
-    font-size: 14px;
-    padding-left: 10px;
-    /* margin: 0 0; */
-}
-
-#sidebar .variable-panel {
+#sidebar .section  {
     border-bottom: 2px solid var(--sidebar-color-light);
-    padding-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-#sidebar .variable-panel > * {
+    /* padding-bottom: 20px; */
     /* display: flex; */
-    /* justify-content: space-between; */
-    /* align-items: center; */
-    /* margin: 10px 0; */
-    padding-bottom: 10px;
+    /* flex-direction: column; */
 }
 
-
-
-#sidebar .content-box div div {
-    margin-left: 10px;
-}
 
 .preset-button {
     padding: 5px;

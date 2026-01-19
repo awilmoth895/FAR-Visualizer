@@ -47,7 +47,7 @@ body {
   display: flex;
   flex-direction: row;
   height: 100vh;
-  margin-top: 205px;
+  margin-top: 181px;
   padding: 20px;
 }
 
@@ -59,12 +59,4 @@ body {
   /* top: 88px; */
   /* width: ; */
   /* top: 100%; */
-
-}
-
-.content-box {
-    flex: 1;
-    padding: 0px 20px;
-    /* border-right: 2px solid #588157; */
-    margin: 10px;
 }

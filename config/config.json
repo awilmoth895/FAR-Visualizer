@@ -2,8 +2,8 @@
     "scale": 10,
     "views": {
         "topDown": true,
-        "side": false,
-        "front": false,
+        "side": true,
+        "front": true,
         "iso": false
     }
 }
