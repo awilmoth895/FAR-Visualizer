@@ -65,14 +65,16 @@ body {
 @media (max-width: 600px) {
   #visualization-info-container {
     margin-left: 0;
+    /* overflow-y: scroll; */
   }
   #visualization-container {
     flex-direction: column;
     padding-left: 0px;
     margin-top: 0;
-    margin-bottom: -265px;
+    /* margin-bottom: 1000px; */
+    /* touch-action: pinch-zoom; */
     /* overflow-y: scroll; */
-    /* height: ; */
+    height: 100%;
   }
 
   #visualization-container h2{
@@ -82,8 +84,24 @@ body {
 
   .info-panel-container {
     /* min-width: 100vw; */
-    position: absolute;
-    bottom: calc(-100vh + 325px);
+    /* overflow-y: hidden; */
+    position: fixed;
+    /* bottom: calc(-100vh + 40%); */
+    bottom: 0;
+    z-index: 1000;
+    /* top: calc(100vh - 45px); */
+
+  }
+
+  .info-panel-container.open {
+    /* top: calc(100vh - 60%); */
+    top: 73px;
+    /* position: ; */
+    /* bottom: 0; */
+    overflow-y: scroll;
+  
+    height: 20000px;
+
   }
   
   #sidebar-container {

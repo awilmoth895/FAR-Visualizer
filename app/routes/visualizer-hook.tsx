@@ -100,7 +100,8 @@ export default function VisualizerHook() {
 
     const {
         scale, setScale,
-        views, setViews
+        views, setViews,
+        infoOpen, setInfoOpen
     } = useConfigContext();
 
     // local UI-only flags
@@ -169,6 +170,7 @@ export default function VisualizerHook() {
     const buildingHeight = calculateBuildingHeight();
     const numUnits = calculateNumberOfUnits();
     const buildingArea = calculateBuildingArea();
+
 
     // function unitCalc() {
 
@@ -500,7 +502,7 @@ export default function VisualizerHook() {
                     <Sidebar />
                 </div>
                 <div id="visualization-info-container">
-                    <div className='info-panel-container'>
+                    <div className={`info-panel-container ${infoOpen ? 'open' : ''}`}>
                         <InfoPanel />
                     </div>
                     <div id="visualization-container">

@@ -14,10 +14,12 @@ export function useConfig(init: ConfigContextType) {
         "iso": false
     });
     const [menuOpen, setMenuOpen] = useState(false);
+    const [infoOpen, setInfoOpen] = useState(false);
 
     return {
         scale, setScale,
         views, setViews,
-        menuOpen, setMenuOpen
+        menuOpen, setMenuOpen,
+        infoOpen, setInfoOpen
     } as const
 }

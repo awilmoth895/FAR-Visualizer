@@ -2,6 +2,7 @@ import { useZoningContext } from "~/context/ZoningContext";
 import "./infoPanel.css";
 import Section from "./parts/section";
 import { useEffect, useState } from "react";
+import { useConfigContext } from "~/context/ConfigContext";
  
 
 export default function infoPanel() {
@@ -34,7 +35,9 @@ export default function infoPanel() {
     // const numUnits = calculateNumberOfUnits();
     // const buildingArea = calculateBuildingArea();
 
-   const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
+    const {infoOpen, setInfoOpen } = useConfigContext();
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
  
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 600);
@@ -46,16 +49,27 @@ export default function infoPanel() {
         if (!isMobile) {
             return null;
         }
+        console.log("Rendering pullout panel, infoOpen:", infoOpen);
         
+        const buttonText = infoOpen ? "Hide Information" : "Show Information";
+
         return (
             <div className="pullout-panel">
-                <span>Pull Up For Info</span>
+                <a onClick={() => {setInfoOpen(!infoOpen); console.log("Toggling info panel"); }}>{buttonText}</a>
+            </div>
+        );
+    }
+
+    if (isMobile && !infoOpen) {
+        return (
+            <div id="info-panel" >
+                {pulloutPanel()}
             </div>
         );
     }
 
     return (
-        <div id="info-panel">
+        <div id="info-panel" >
             {pulloutPanel()}
             <Section title="Building" >
                 <div>Width: {buildingWidth} ft</div>
