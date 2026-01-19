@@ -147,7 +147,8 @@ export default function isometricView() {
 
     return (
         <div className="isometric-view view">
-            <h2>Front View</h2>
+            <h2>Isometric View</h2>
+            <div className="note">** This is a work in progress and does not support open space or parking yet **</div>
             {/* <svg className="graph" width={frontW + sideD} height={frontH + sideH} transform={isoMatrix}> */}
             <svg className="graph" width={frontW + sideD} height={frontH * 2 + sideH}>
                 <defs>

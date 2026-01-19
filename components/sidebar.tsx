@@ -246,7 +246,7 @@ export default function sidebar() {
                         </label>
                         <label>
                             <input name="iso" type="checkbox" checked={views.iso} onChange={handleViewChecked}></input>
-                            Isometric
+                            Isometric <span className="warning"> - experimental</span>
                         </label>
                     </div>
                 </label>

@@ -74,3 +74,9 @@ line {
 .building.top {
     fill: red;
 }
+
+.note {
+    font-style: italic;
+    font-size: 14px;
+    color: rgb(201, 23, 23);
+}
