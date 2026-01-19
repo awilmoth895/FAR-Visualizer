@@ -1,6 +1,7 @@
 import { useZoningContext } from "~/context/ZoningContext";
 import "./infoPanel.css";
 import Section from "./parts/section";
+import { useEffect, useState } from "react";
  
 
 export default function infoPanel() {
@@ -33,8 +34,29 @@ export default function infoPanel() {
     // const numUnits = calculateNumberOfUnits();
     // const buildingArea = calculateBuildingArea();
 
+   const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
+ 
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 600);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    function pulloutPanel() {
+        if (!isMobile) {
+            return null;
+        }
+        
+        return (
+            <div className="pullout-panel">
+                <span>Pull Up For Info</span>
+            </div>
+        );
+    }
+
     return (
         <div id="info-panel">
+            {pulloutPanel()}
             <Section title="Building" >
                 <div>Width: {buildingWidth} ft</div>
                 <div>Depth: {Math.round((buildingDepth * 10) / 10)} ft</div>

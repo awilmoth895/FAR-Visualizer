@@ -80,3 +80,9 @@ line {
     font-size: 14px;
     color: rgb(201, 23, 23);
 }
+
+@media (max-width: 600px) {
+    .view {
+        /* width: 400px */
+    }
+}

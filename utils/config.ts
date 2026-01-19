@@ -13,9 +13,11 @@ export function useConfig(init: ConfigContextType) {
         "front": false,
         "iso": false
     });
+    const [menuOpen, setMenuOpen] = useState(false);
 
     return {
         scale, setScale,
-        views, setViews
+        views, setViews,
+        menuOpen, setMenuOpen
     } as const
 }

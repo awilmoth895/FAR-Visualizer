@@ -1,5 +1,5 @@
 
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import "./sidebar.css";
 import presetsJson from '../config/defaults.json';
 import { useZoningContext } from "../app/context/ZoningContext";
@@ -34,6 +34,17 @@ export default function sidebar() {
         scale, setScale,
         views, setViews
     }  = useConfigContext();
+
+    const { menuOpen, setMenuOpen } = useConfigContext();
+
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
+ 
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 600);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
 
     // local UI-only flags
@@ -254,6 +265,9 @@ export default function sidebar() {
         );
     }
 
+    if (menuOpen === false && isMobile) {
+        return null;
+    }
 
     return (
         <div id="sidebar">
